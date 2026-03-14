@@ -12,11 +12,18 @@
 <style>
 
 html{scroll-behavior:smooth;}
+body{background:#0f0f0f;color:white;font-family:system-ui;}
 
-body{
-background:#0f0f0f;
-color:white;
-font-family:system-ui;
+/* SCROLL PROGRESS BAR */
+
+#scrollProgress{
+position:fixed;
+top:0;
+left:0;
+height:3px;
+background:white;
+width:0%;
+z-index:9999;
 }
 
 /* HERO */
@@ -33,68 +40,7 @@ inset:0;
 background:rgba(0,0,0,0.6);
 }
 
-/* CARD */
-
-.card{
-position:relative;
-overflow:hidden;
-border-radius:14px;
-box-shadow:0 10px 25px rgba(0,0,0,0.4);
-transition:transform .3s ease;
-break-inside:avoid;
-margin-bottom:18px;
-}
-
-.card:hover{
-transform:translateY(-6px);
-}
-
-.card img{
-width:100%;
-height:auto;
-display:block;
-transition:transform .7s ease, filter .6s ease;
-}
-
-.card:hover img{
-transform:scale(1.15);
-filter:brightness(1.1);
-}
-
-.card::after{
-content:"View";
-position:absolute;
-inset:0;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:18px;
-letter-spacing:2px;
-background:rgba(0,0,0,0.5);
-opacity:0;
-transition:.4s;
-}
-
-.card:hover::after{
-opacity:1;
-}
-
-/* MASONRY */
-
-.masonry{
-column-count:3;
-column-gap:18px;
-}
-
-@media(max-width:900px){
-.masonry{column-count:2;}
-}
-
-@media(max-width:500px){
-.masonry{column-count:1;}
-}
-
-/* QUOTE */
+/* CREATIVE THOUGHT */
 
 .quote-section{
 background:#0a0a0a;
@@ -109,6 +55,7 @@ background:rgba(255,255,255,0.04);
 border:1px solid rgba(255,255,255,0.1);
 border-radius:18px;
 padding:48px 56px;
+cursor:pointer;
 position:relative;
 }
 
@@ -134,8 +81,90 @@ color:rgba(255,255,255,0.15);
 font-size:1.35rem;
 font-style:italic;
 color:#e2e2e2;
-line-height:1.7;
 min-height:60px;
+}
+
+/* PINTEREST GALLERY */
+
+.masonry{
+column-count:4;
+column-gap:14px;
+}
+
+@media(max-width:900px){
+.masonry{column-count:3;}
+}
+
+@media(max-width:600px){
+.masonry{column-count:2;}
+}
+
+.card{
+break-inside:avoid;
+margin-bottom:14px;
+position:relative;
+cursor:pointer;
+}
+
+.card img{
+width:100%;
+border-radius:10px;
+display:block;
+transition:transform .4s ease;
+}
+
+.card:hover img{
+transform:scale(1.05);
+}
+
+.caption{
+position:absolute;
+bottom:0;
+left:0;
+right:0;
+background:linear-gradient(transparent, rgba(0,0,0,0.85));
+color:white;
+padding:24px 12px 10px;
+opacity:0;
+transition:.3s;
+border-radius:0 0 10px 10px;
+}
+
+.caption .img-name{
+font-size:13px;
+font-weight:700;
+letter-spacing:.5px;
+margin-bottom:2px;
+}
+
+.caption .img-sub{
+font-size:11px;
+color:#ccc;
+}
+
+.card:hover .caption{
+opacity:1;
+}
+
+/* POPUP */
+
+#popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+display:none;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+#popup img{
+max-width:90%;
+max-height:90%;
+border-radius:10px;
 }
 
 /* FOOTER */
@@ -143,27 +172,13 @@ min-height:60px;
 .footer{
 background:#050505;
 border-top:1px solid rgba(255,255,255,0.08);
-padding:30px 20px;
+padding:30px;
 text-align:center;
 }
 
-.footer-links{
-margin-top:10px;
-display:flex;
-justify-content:center;
-gap:20px;
-flex-wrap:wrap;
-}
-
-.footer-links a{
-font-size:14px;
-color:rgba(255,255,255,0.6);
-text-decoration:none;
-transition:.3s;
-}
-
-.footer-links a:hover{
-color:white;
+.footer a{
+color:#aaa;
+margin:0 10px;
 }
 
 </style>
@@ -172,20 +187,20 @@ color:white;
 
 <body>
 
+<div id="scrollProgress"></div>
+
 <!-- NAVBAR -->
 
 <nav class="fixed top-0 left-0 w-full z-50 backdrop-blur bg-black/40 border-b border-white/10">
 <div class="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
 
-<h1 class="font-semibold text-lg tracking-wide">
-Pavan Hegde
-</h1>
+<h1 class="font-semibold text-lg">Pavan Hegde</h1>
 
 <div class="flex gap-6 text-sm text-gray-300">
-<a href="#about" class="hover:text-white">About</a>
-<a href="#thought" class="hover:text-white">Thought</a>
-<a href="#work" class="hover:text-white">Gallery</a>
-<a href="#contact" class="hover:text-white">Contact</a>
+<a href="#about">About</a>
+<a href="#thought">Thought</a>
+<a href="#work">Gallery</a>
+<a href="#contact">Contact</a>
 </div>
 
 </div>
@@ -195,25 +210,19 @@ Pavan Hegde
 
 <section class="hero h-screen flex items-center justify-center text-center">
 
-<div class="relative z-10 max-w-xl px-6">
+<div class="relative z-10">
 
 <img src="profile.jpg"
-class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white object-cover shadow-lg">
+class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white object-cover">
 
-<h1 class="text-6xl font-bold mb-4">
-Pavan Hegde
-</h1>
+<h1 class="text-6xl font-bold mb-4">Pavan Hegde</h1>
 
-<p class="text-xl text-gray-300 mb-2">
+<p class="text-xl text-gray-300">
 📸 Capturing Moments • ✏️ Sketch Artist
 </p>
 
-<p class="text-gray-400 mb-8">
-Turning emotions into visual stories
-</p>
-
 <a href="#work"
-class="bg-white text-black px-8 py-3 rounded-full font-semibold hover:scale-110 transition">
+class="mt-8 inline-block bg-white text-black px-8 py-3 rounded-full">
 View My Gallery </a>
 
 </div>
@@ -226,15 +235,9 @@ View My Gallery </a>
 
 <h2 class="text-4xl font-bold mb-6">About Me</h2>
 
-<p class="text-gray-400 text-lg leading-relaxed">
-
-Hi, I'm Pavan.
-
-I love capturing real moments through photography and expressing emotions through sketches.
-
+<p class="text-gray-400 text-lg">
+Hi, I'm Pavan. I capture real moments through photography and express emotions through sketches.
 Every photo and every line tells a story.
-This space is where creativity, imagination, and visual storytelling come together.
-
 </p>
 
 </section>
@@ -245,8 +248,14 @@ This space is where creativity, imagination, and visual storytelling come togeth
 
 <h2 class="text-4xl font-bold mb-10">Creative Thought</h2>
 
-<div class="quote-box">
+<div class="quote-box" id="thoughtBox">
+
 <p id="quote" class="quote-text"></p>
+
+<p style="font-size:12px;color:#888;margin-top:14px;">
+Tap for a new thought ✨
+</p>
+
 </div>
 
 </section>
@@ -259,19 +268,39 @@ This space is where creativity, imagination, and visual storytelling come togeth
 Gallery
 </h2>
 
-<div id="galleryGrid" class="masonry">
+  <div class="masonry">
 
-<div class="card"><img src="photography/p1.jpg" onclick="openImg(this)"></div>
-<div class="card"><img src="photography/p2.jpg" onclick="openImg(this)"></div>
-<div class="card"><img src="sketches/s1.webp" onclick="openImg(this)"></div>
-<div class="card"><img src="photography/p3.jpg" onclick="openImg(this)"></div>
-<div class="card"><img src="sketches/s2.jpg" onclick="openImg(this)"></div>
-<div class="card"><img src="photography/p4.jpg" onclick="openImg(this)"></div>
-<div class="card"><img src="photography/p5.jpg" onclick="openImg(this)"></div>
-<div class="card"><img src="sketches/s3.jpg" onclick="openImg(this)"></div>
-<div class="card"><img src="photography/p6.jpg" onclick="openImg(this)"></div>
+    <!-- Photography -->
+    <div class="card"><img src="photography/p1.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Golden Hour</div><div class="img-sub">Golden hour captured at sunset</div></div></div>
+    <div class="card"><img src="photography/p2.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Frozen In Time</div><div class="img-sub">Moments frozen in time</div></div></div>
+    <div class="card"><img src="photography/p3.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Quiet Beauty</div><div class="img-sub">Nature's quiet beauty</div></div></div>
+    <div class="card"><img src="photography/p4.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Storyteller</div><div class="img-sub">Every frame tells a story</div></div></div>
+    <div class="card"><img src="photography/p5.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Calm Moment</div><div class="img-sub">Stillness in the chaos</div></div></div>
+    <div class="card"><img src="photography/p6.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Perspective</div><div class="img-sub">A unique perspective captured</div></div></div>
+    <div class="card"><img src="photography/p7.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Through The Lens</div><div class="img-sub">Discovering life through the lens</div></div></div>
+    <div class="card"><img src="photography/p8.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Luminance</div><div class="img-sub">Playing with light and shadow</div></div></div>
+    <div class="card"><img src="photography/p9.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Wanderlust</div><div class="img-sub">Chasing horizons endlessly</div></div></div>
+    <div class="card"><img src="photography/p10.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Raw Emotion</div><div class="img-sub">Unfiltered and real</div></div></div>
+    <div class="card"><img src="photography/p11.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Timeless</div><div class="img-sub">A timeless frame</div></div></div>
+    <div class="card"><img src="photography/p12.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Soul of the Street</div><div class="img-sub">Street life immortalized</div></div></div>
+    <div class="card"><img src="photography/p13.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Serenity</div><div class="img-sub">Peace found in the ordinary</div></div></div>
+    <div class="card"><img src="photography/p14.jpeg" onclick="openImg(this)"><div class="caption"><div class="img-name">Vivid</div><div class="img-sub">Colors that speak loudly</div></div></div>
+    <div class="card"><img src="photography/p15.jpeg" onclick="openImg(this)"><div class="caption"><div class="img-name">Silhouette</div><div class="img-sub">Shape against the light</div></div></div>
+    <div class="card"><img src="photography/p19.jpeg" onclick="openImg(this)"><div class="caption"><div class="img-name">Depth of Field</div><div class="img-sub">Focus on what matters</div></div></div>
 
-</div>
+    <!-- Sketches -->
+    <div class="card"><img src="sketches/s1.webp" onclick="openImg(this)"><div class="caption"><div class="img-name">Pencil Dreams</div><div class="img-sub">Emotion in every stroke</div></div></div>
+    <div class="card"><img src="sketches/s2.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Beyond Words</div><div class="img-sub">Art beyond what words can say</div></div></div>
+    <div class="card"><img src="sketches/s3.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Imagination</div><div class="img-sub">Imagination in pencil</div></div></div>
+    <div class="card"><img src="sketches/s4.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Portraits</div><div class="img-sub">Faces drawn from soul</div></div></div>
+    <div class="card"><img src="sketches/s5.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Linework</div><div class="img-sub">Precision in every line</div></div></div>
+    <div class="card"><img src="sketches/s6.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Expressions</div><div class="img-sub">Capturing raw expressions</div></div></div>
+    <div class="card"><img src="sketches/s7.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Texture Study</div><div class="img-sub">Exploring texture with graphite</div></div></div>
+    <div class="card"><img src="sketches/s8.webp" onclick="openImg(this)"><div class="caption"><div class="img-name">Sketch Story</div><div class="img-sub">A narrative told in lines</div></div></div>
+    <div class="card"><img src="sketches/s9.webp" onclick="openImg(this)"><div class="caption"><div class="img-name">Abstract Mind</div><div class="img-sub">Thoughts turned into art</div></div></div>
+    <div class="card"><img src="sketches/s10.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Final Stroke</div><div class="img-sub">The art of finishing touches</div></div></div>
+
+  </div>
 
 </section>
 
@@ -284,102 +313,116 @@ Contact Me
 </h2>
 
 <p class="text-gray-400 mb-8">
-Feel free to reach out for collaborations or creative discussions.
+Open for collaborations and creative projects.
 </p>
 
 <a href="mailto:pavanhegade1232@gmail.com"
-class="bg-white text-black px-8 py-3 rounded-full font-semibold hover:scale-105 transition">
+class="bg-white text-black px-8 py-3 rounded-full">
 Connect </a>
 
 </section>
 
-<!-- IMAGE POPUP -->
+<!-- POPUP VIEWER -->
 
-<div id="popup" class="fixed inset-0 bg-black bg-opacity-90 hidden items-center justify-center">
-
-<img id="popupImg" class="max-h-[90%] rounded-lg">
-
+<div id="popup">
+<img id="popupImg">
 </div>
 
 <!-- FOOTER -->
 
 <footer class="footer">
 
-<p>© 2025 Pavan Hegde. All Rights Reserved.</p>
+<p>© 2025 Pavan Hegde</p>
 
-<div class="footer-links">
-<a href="https://instagram.com/pa.v0ne" target="_blank">Instagram</a>
-<a href="https://www.linkedin.com/in/pavan06/" target="_blank">LinkedIn</a>
-<a href="mailto:pavanhegade1232@gmail.com">Email</a>
+<div>
+<a href="https://instagram.com/pa.v0ne">Instagram</a>
+<a href="https://linkedin.com">LinkedIn</a>
 </div>
 
 </footer>
 
 <script>
 
-/* DAILY QUOTES */
+/* SCROLL PROGRESS */
 
-const quotes=[
-"Art is not what you see, but what you make others see.",
+window.addEventListener("scroll",()=>{
+let scrollTop=document.documentElement.scrollTop;
+let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+let progress=(scrollTop/height)*100;
+document.getElementById("scrollProgress").style.width=progress+"%";
+});
+
+
+/* CREATIVE THOUGHT */
+
+const thoughts=[
 "Photography is the pause button of life.",
-"Every frame holds a story waiting to be told.",
-"Creativity is intelligence having fun.",
-"Art speaks where words are unable to explain.",
-"A sketch is a thought captured in lines.",
-"Through the lens, ordinary moments become extraordinary.",
 "Every picture is a poem without words.",
-"Creativity takes courage.",
-"Art enables us to find ourselves.",
-"Moments pass, photographs stay.",
-"Sketching is the language of imagination."
+"Creativity begins where comfort ends.",
+"Art reveals what words cannot explain.",
+"Light creates the story in photography."
 ];
 
 const quoteElement=document.getElementById("quote");
-const day=new Date().getDate();
-const quote=quotes[day%quotes.length];
 
+function typeWriter(text){
+quoteElement.innerHTML="";
 let i=0;
-
-function typeWriter(){
-if(i<quote.length){
-quoteElement.innerHTML+=quote.charAt(i);
+function typing(){
+if(i<text.length){
+quoteElement.innerHTML+=text.charAt(i);
 i++;
-setTimeout(typeWriter,30);
+setTimeout(typing,30);
+}}
+typing();
 }
-}
 
-typeWriter();
+typeWriter(thoughts[new Date().getDate()%thoughts.length]);
 
-
-/* SCROLL ANIMATION */
-
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.style.opacity="1";
-entry.target.style.transform="translateY(0)";
-}
-});
-},{threshold:0.15});
-
-document.querySelectorAll(".card").forEach((card,index)=>{
-card.style.opacity="0";
-card.style.transform="translateY(60px)";
-card.style.transition=`all 0.6s ease ${(index*0.08)}s`;
-observer.observe(card);
+document.getElementById("thoughtBox").addEventListener("click",()=>{
+const random=thoughts[Math.floor(Math.random()*thoughts.length)];
+typeWriter(random);
 });
 
 
-/* IMAGE POPUP */
+/* POPUP GALLERY */
+
+const popup=document.getElementById("popup");
+const popupImg=document.getElementById("popupImg");
+const images=[...document.querySelectorAll(".card img")];
+let currentIndex=0;
 
 function openImg(img){
-document.getElementById("popup").style.display="flex";
-document.getElementById("popupImg").src=img.src;
+popup.style.display="flex";
+popupImg.src=img.src;
+currentIndex=images.indexOf(img);
 }
 
-document.getElementById("popup").onclick=function(){
-this.style.display="none";
+popup.onclick=()=>popup.style.display="none";
+
+
+/* SWIPE MOBILE */
+
+let startX=0;
+
+popup.addEventListener("touchstart",e=>{
+startX=e.touches[0].clientX;
+});
+
+popup.addEventListener("touchend",e=>{
+let endX=e.changedTouches[0].clientX;
+
+if(startX-endX>50){
+currentIndex=(currentIndex+1)%images.length;
+popupImg.src=images[currentIndex].src;
 }
+
+if(endX-startX>50){
+currentIndex=(currentIndex-1+images.length)%images.length;
+popupImg.src=images[currentIndex].src;
+}
+
+});
 
 </script>
 
