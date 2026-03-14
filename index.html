@@ -1,432 +1,599 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pavan Hegde – Portfolio</title>
+    <title>Pavan Hegde – Portfolio</title>
 
-<script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-<style>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
 
-html{scroll-behavior:smooth;}
-body{background:#0f0f0f;color:white;font-family:system-ui;}
+        body {
+            background: #0f0f0f;
+            color: white;
+            font-family: system-ui;
+        }
 
-/* SCROLL PROGRESS BAR */
+        /* SCROLL PROGRESS BAR */
 
-#scrollProgress{
-position:fixed;
-top:0;
-left:0;
-height:3px;
-background:white;
-width:0%;
-z-index:9999;
-}
+        #scrollProgress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: white;
+            width: 0%;
+            z-index: 9999;
+        }
 
-/* HERO */
+        /* HERO */
 
-.hero{
-background:url("https://picsum.photos/1920/1200?grayscale") center/cover no-repeat;
-position:relative;
-}
+        .hero {
+            background: url("https://picsum.photos/1920/1200?grayscale") center/cover no-repeat;
+            position: relative;
+        }
 
-.hero::before{
-content:"";
-position:absolute;
-inset:0;
-background:rgba(0,0,0,0.6);
-}
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+        }
 
-/* CREATIVE THOUGHT */
+        /* CREATIVE THOUGHT */
 
-.quote-section{
-background:#0a0a0a;
-padding:100px 24px;
-text-align:center;
-}
+        .quote-section {
+            background: #0a0a0a;
+            padding: 100px 24px;
+            text-align: center;
+        }
 
-.quote-box{
-display:inline-block;
-max-width:720px;
-background:rgba(255,255,255,0.04);
-border:1px solid rgba(255,255,255,0.1);
-border-radius:18px;
-padding:48px 56px;
-cursor:pointer;
-position:relative;
-}
+        .quote-box {
+            display: inline-block;
+            max-width: 720px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 48px 56px;
+            cursor: pointer;
+            position: relative;
+        }
 
-.quote-box::before{
-content:'\201C';
-position:absolute;
-top:-28px;
-left:32px;
-font-size:100px;
-color:rgba(255,255,255,0.15);
-}
+        .quote-box::before {
+            content: '\201C';
+            position: absolute;
+            top: -28px;
+            left: 32px;
+            font-size: 100px;
+            color: rgba(255, 255, 255, 0.15);
+        }
 
-.quote-box::after{
-content:'\201D';
-position:absolute;
-bottom:-60px;
-right:32px;
-font-size:100px;
-color:rgba(255,255,255,0.15);
-}
+        .quote-box::after {
+            content: '\201D';
+            position: absolute;
+            bottom: -60px;
+            right: 32px;
+            font-size: 100px;
+            color: rgba(255, 255, 255, 0.15);
+        }
 
-.quote-text{
-font-size:1.35rem;
-font-style:italic;
-color:#e2e2e2;
-min-height:60px;
-}
+        .quote-text {
+            font-size: 1.35rem;
+            font-style: italic;
+            color: #e2e2e2;
+            min-height: 60px;
+        }
 
-/* PINTEREST GALLERY */
+        /* PINTEREST GALLERY */
 
-.masonry{
-column-count:4;
-column-gap:14px;
-}
+        .masonry {
+            column-count: 4;
+            column-gap: 14px;
+        }
 
-@media(max-width:900px){
-.masonry{column-count:3;}
-}
+        @media(max-width:900px) {
+            .masonry {
+                column-count: 3;
+            }
+        }
 
-@media(max-width:600px){
-.masonry{column-count:2;}
-}
+        @media(max-width:600px) {
+            .masonry {
+                column-count: 2;
+            }
+        }
 
-.card{
-break-inside:avoid;
-margin-bottom:14px;
-position:relative;
-cursor:pointer;
-}
+        .card {
+            break-inside: avoid;
+            margin-bottom: 14px;
+            position: relative;
+            cursor: pointer;
+        }
 
-.card img{
-width:100%;
-border-radius:10px;
-display:block;
-transition:transform .4s ease;
-}
+        .card img {
+            width: 100%;
+            border-radius: 10px;
+            display: block;
+            transition: transform .4s ease;
+        }
 
-.card:hover img{
-transform:scale(1.05);
-}
+        .card:hover img {
+            transform: scale(1.05);
+        }
 
-.caption{
-position:absolute;
-bottom:0;
-left:0;
-right:0;
-background:linear-gradient(transparent, rgba(0,0,0,0.85));
-color:white;
-padding:24px 12px 10px;
-opacity:0;
-transition:.3s;
-border-radius:0 0 10px 10px;
-}
+        .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+            color: white;
+            padding: 24px 12px 10px;
+            opacity: 0;
+            transition: .3s;
+            border-radius: 0 0 10px 10px;
+        }
 
-.caption .img-name{
-font-weight:600;
-font-size:13px;
-letter-spacing:.4px;
-margin-bottom:2px;
-}
+        .caption .img-name {
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: .4px;
+            margin-bottom: 2px;
+        }
 
-.caption .img-sub{
-font-size:11px;
-opacity:0.8;
-}
+        .caption .img-sub {
+            font-size: 11px;
+            opacity: 0.8;
+        }
 
-.card:hover .caption{
-opacity:1;
-}
+        .card:hover .caption {
+            opacity: 1;
+        }
 
-/* POPUP */
+        /* POPUP */
 
-#popup{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:black;
-display:none;
-align-items:center;
-justify-content:center;
-z-index:9999;
-}
+        #popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
 
-#popup img{
-max-width:90%;
-max-height:90%;
-border-radius:10px;
-}
+        #popup img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
 
-/* FOOTER */
+        /* FOOTER */
 
-.footer{
-background:#050505;
-border-top:1px solid rgba(255,255,255,0.08);
-padding:30px;
-text-align:center;
-}
+        .footer {
+            background: #050505;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 30px;
+            text-align: center;
+        }
 
-.footer a{
-color:#aaa;
-margin:0 10px;
-}
-
-</style>
+        .footer a {
+            color: #aaa;
+            margin: 0 10px;
+        }
+    </style>
 
 </head>
 
 <body>
 
-<div id="scrollProgress"></div>
+    <div id="scrollProgress"></div>
 
-<!-- NAVBAR -->
+    <!-- NAVBAR -->
 
-<nav class="fixed top-0 left-0 w-full z-50 backdrop-blur bg-black/40 border-b border-white/10">
-<div class="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
+    <nav class="fixed top-0 left-0 w-full z-50 backdrop-blur bg-black/40 border-b border-white/10">
+        <div class="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
 
-<h1 class="font-semibold text-lg">Pavan Hegde</h1>
+            <h1 class="font-semibold text-lg">Pavan Hegde</h1>
 
-<div class="flex gap-6 text-sm text-gray-300">
-<a href="#about">About</a>
-<a href="#thought">Thought</a>
-<a href="#work">Gallery</a>
-<a href="#contact">Contact</a>
-</div>
+            <div class="flex gap-6 text-sm text-gray-300">
+                <a href="#about">About</a>
+                <a href="#thought">Thought</a>
+                <a href="#work">Gallery</a>
+                <a href="#contact">Contact</a>
+            </div>
 
-</div>
-</nav>
+        </div>
+    </nav>
 
-<!-- HERO -->
+    <!-- HERO -->
 
 <section class="hero h-screen flex items-center justify-center text-center">
 
-<div class="relative z-10">
+    <div class="relative z-10">
 
-<img src="profile.jpg"
-class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white object-cover">
+        <img src="profile.jpg" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white object-cover">
 
-<h1 class="text-6xl font-bold mb-4">Pavan Hegde</h1>
+        <h1 class="text-6xl font-bold mb-4">Pavan Hegde</h1>
 
-<p class="text-xl text-gray-300">
-📸 Capturing Moments • ✏️ Sketch Artist
-</p>
+        <p class="text-xl text-gray-300">
+        Seeing the world differently — one frame and one sketch at a time 📸✏️
+        </p>
 
-<a href="#work"
-class="mt-8 inline-block bg-white text-black px-8 py-3 rounded-full">
-View My Gallery </a>
+        <a href="#work" class="mt-8 inline-block bg-white text-black px-8 py-3 rounded-full">
+        View My Gallery
+        </a>
 
-</div>
-
-</section>
-
-<!-- ABOUT -->
-
-<section id="about" class="py-24 text-center max-w-3xl mx-auto">
-
-<h2 class="text-4xl font-bold mb-6">About Me</h2>
-
-<p class="text-gray-400 text-lg">
-Hi, I'm Pavan. I capture real moments through photography and express emotions through sketches.
-Every photo and every line tells a story.
-</p>
+    </div>
 
 </section>
 
-<!-- CREATIVE THOUGHT -->
+    <!-- ABOUT -->
 
-<section id="thought" class="quote-section">
+   <section id="about" class="py-24 text-center max-w-3xl mx-auto">
 
-<h2 class="text-4xl font-bold mb-10">Creative Thought</h2>
+    <h2 class="text-4xl font-bold mb-6">About Me</h2>
 
-<div class="quote-box" id="thoughtBox">
+        <p class="text-gray-400 text-lg">
+            Hi, I'm Pavan. I enjoy building ideas with technology and expressing creativity 
+            through photography and sketching. Whether it’s writing code or capturing a moment, 
+            I love turning simple observations into meaningful creations.
+        </p>
 
-<p id="quote" class="quote-text"></p>
+        <p  class="text-gray-500 mt-6 italic">
+            Engineering the digital world while capturing the real one.
+        </p>
 
-<p style="font-size:12px;color:#888;margin-top:14px;">
-Tap for a new thought ✨
-</p>
+    </section>
 
-</div>
+    <!-- CREATIVE THOUGHT -->
 
-</section>
+    <section id="thought" class="quote-section">
 
-<!-- GALLERY -->
+        <h2 class="text-4xl font-bold mb-10">Creative Thought</h2>
 
-<section id="work" class="py-24 max-w-6xl mx-auto px-6">
+        <div class="quote-box" id="thoughtBox">
 
-<h2 class="text-5xl font-bold text-center mb-12">
-Gallery
-</h2>
+            <p id="quote" class="quote-text"></p>
 
-  <div class="masonry">
+            <p style="font-size:12px;color:#888;margin-top:14px;">
+                Tap for a new thought ✨
+            </p>
 
-    <!-- Photography -->
-    <div class="card"><img src="photography/p1.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Curious Lizard</div><div class="img-sub">A calm reptile resting on a cable</div></div></div>
-    <div class="card"><img src="photography/p2.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Yellow Bird</div><div class="img-sub">A tiny bird perched quietly on a wire</div></div></div>
-    <div class="card"><img src="photography/p3.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Boats &amp; Clouds</div><div class="img-sub">Fishing boats resting under dramatic skies</div></div></div>
-    <div class="card"><img src="photography/p4.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Ocean Sunset</div><div class="img-sub">Golden sun meeting the waves</div></div></div>
-    <div class="card"><img src="photography/p5.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Boat Silhouette</div><div class="img-sub">A lone boat drifting through sunset light</div></div></div>
-    <div class="card"><img src="photography/p6.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Hidden Waterfall</div><div class="img-sub">A majestic waterfall surrounded by misty hills</div></div></div>
-    <div class="card"><img src="photography/p7.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Temple Architecture</div><div class="img-sub">Intricate temple structure reaching toward the sky</div></div></div>
-    <div class="card"><img src="photography/p8.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Lake Reflections</div><div class="img-sub">Evening light reflecting on calm waters</div></div></div>
-    <div class="card"><img src="photography/p9.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Cliffside View</div><div class="img-sub">A traveler enjoying nature from the edge</div></div></div>
-    <div class="card"><img src="photography/p10.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Forest Waterfall</div><div class="img-sub">A river carving its way through green valleys</div></div></div>
-    <div class="card"><img src="photography/p11.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Mountain Layers</div><div class="img-sub">Endless hills fading into the mist</div></div></div>
-    <div class="card"><img src="photography/p12.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Valley Landscape</div><div class="img-sub">Rolling green mountains under cloudy skies</div></div></div>
-    <div class="card"><img src="photography/p13.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Tree Canopy</div><div class="img-sub">Looking up through branches and sunlight</div></div></div>
-    <div class="card"><img src="photography/p14.jpeg" onclick="openImg(this)"><div class="caption"><div class="img-name">City Skyline</div><div class="img-sub">Urban life rising beneath a vibrant sky</div></div></div>
-    <div class="card"><img src="photography/p15.jpeg" onclick="openImg(this)"><div class="caption"><div class="img-name">Sacred Shrine</div><div class="img-sub">A temple space glowing with devotion</div></div></div>
-    <div class="card"><img src="photography/p19.jpeg" onclick="openImg(this)"><div class="caption"><div class="img-name">Art Gallery</div><div class="img-sub">Minimalist interior showcasing creative works</div></div></div>
-    <div class="card"><img src="photography/p22.jpeg" onclick="openImg(this)"><div class="caption"><div class="img-name">Lotus Moment</div><div class="img-sub">Holding a lotus over a peaceful pond</div></div></div>
-    <div class="card"><img src="photography/p21.jpeg" onclick="openImg(this)"><div class="caption"><div class="img-name">Backwater Paradise</div><div class="img-sub">Palm trees reflecting on calm river waters</div></div></div>
+        </div>
 
-    <!-- Sketches -->
-    <div class="card"><img src="sketches/s1.webp" onclick="openImg(this)"><div class="caption"><div class="img-name">Shiva Portrait</div><div class="img-sub">A detailed pencil portrait inspired by Lord Shiva</div></div></div>
-    <div class="card"><img src="sketches/s2.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Still Life Study</div><div class="img-sub">Carefully shaded objects exploring light and shadow</div></div></div>
-    <div class="card"><img src="sketches/s3.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Concept Sketch</div><div class="img-sub">An early idea captured on paper</div></div></div>
-    <div class="card"><img src="sketches/s4.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Hand Study</div><div class="img-sub">Exploring anatomy and movement through lines</div></div></div>
-    <div class="card"><img src="sketches/s5.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Workspace</div><div class="img-sub">Tools and sketches shaping creativity</div></div></div>
-    <div class="card"><img src="sketches/s6.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Animal Study</div><div class="img-sub">Detailed sketch capturing animal texture</div></div></div>
-    <div class="card"><img src="sketches/s7.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Figure Drawing</div><div class="img-sub">Exploring human form through graphite</div></div></div>
-    <div class="card"><img src="sketches/s8.webp" onclick="openImg(this)"><div class="caption"><div class="img-name">Dark Portrait</div><div class="img-sub">A dramatic portrait exploring shadows</div></div></div>
-    <div class="card"><img src="sketches/s9.webp" onclick="openImg(this)"><div class="caption"><div class="img-name">Fantasy Horse</div><div class="img-sub">A mystical horse emerging from imagination</div></div></div>
-    <div class="card"><img src="sketches/s10.jpg" onclick="openImg(this)"><div class="caption"><div class="img-name">Abstract Creature</div><div class="img-sub">Creative form blending fantasy and emotion</div></div></div>
+    </section>
 
-  </div>
+    <!-- GALLERY -->
 
-</section>
+    <section id="work" class="py-24 max-w-6xl mx-auto px-6">
 
-<!-- CONTACT -->
+        <h2 class="text-5xl font-bold text-center mb-12">
+            Gallery
+        </h2>
 
-<section id="contact" class="py-24 text-center">
+        <div class="masonry">
 
-<h2 class="text-4xl font-bold mb-6">
-Contact Me
-</h2>
+            <!-- Photography -->
+            <div class="card"><img src="photography/p1.jpg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Curious Lizard</div>
+                    <div class="img-sub">A calm reptile resting on a cable</div>
+                </div>
+            </div>
+            <div class="card"><img src="photography/p2.jpg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Yellow Bird</div>
+                    <div class="img-sub">A tiny bird perched quietly on a wire</div>
+                </div>
+            </div>
+            <div class="card"><img src="photography/p3.jpg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Boats &amp; Clouds</div>
+                    <div class="img-sub">Fishing boats resting under dramatic skies</div>
+                </div>
+            </div>
+            <div class="card"><img src="photography/p4.jpg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Ocean Sunset</div>
+                    <div class="img-sub">Golden sun meeting the waves</div>
+                </div>
+            </div>
+            <div class="card"><img src="photography/p5.jpg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Boat Silhouette</div>
+                    <div class="img-sub">A lone boat drifting through sunset light</div>
+                </div>
+            </div>
+            <div class="card"><img src="photography/p6.jpg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Hidden Waterfall</div>
+                    <div class="img-sub">A majestic waterfall surrounded by misty hills</div>
+                </div>
+            </div>
+            <div class="card"><img src="photography/p7.jpg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Temple Architecture</div>
+                    <div class="img-sub">Intricate temple structure reaching toward the sky</div>
+                </div>
+            </div>
+            <div class="card"><img src="photography/p8.jpg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Lake Reflections</div>
+                    <div class="img-sub">Evening light reflecting on calm waters</div>
+                </div>
+            </div>
+            <div class="card"><img src="photography/p9.jpg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Cliffside View</div>
+                    <div class="img-sub">A traveler enjoying nature from the edge</div>
+                </div>
+            </div>
+            <div class="card"><img src="photography/p10.jpg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Forest Waterfall</div>
+                    <div class="img-sub">A river carving its way through green valleys</div>
+                </div>
+            </div>
+            <div class="card"><img src="photography/p11.jpg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Mountain Layers</div>
+                    <div class="img-sub">Endless hills fading into the mist</div>
+                </div>
+            </div>
+            <div class="card"><img src="photography/p12.jpg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Valley Landscape</div>
+                    <div class="img-sub">Rolling green mountains under cloudy skies</div>
+                </div>
+            </div>
+            <div class="card"><img src="photography/p13.jpg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Tree Canopy</div>
+                    <div class="img-sub">Looking up through branches and sunlight</div>
+                </div>
+            </div>
+            <div class="card"><img src="photography/p14.jpeg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">City Skyline</div>
+                    <div class="img-sub">Urban life rising beneath a vibrant sky</div>
+                </div>
+            </div>
+            <div class="card"><img src="photography/p15.jpeg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Sacred Shrine</div>
+                    <div class="img-sub">A temple space glowing with devotion</div>
+                </div>
+            </div>
+            <div class="card"><img src="photography/p19.jpeg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Art Gallery</div>
+                    <div class="img-sub">Minimalist interior showcasing creative works</div>
+                </div>
+            </div>
+            <div class="card"><img src="photography/p22.jpeg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Lotus Moment</div>
+                    <div class="img-sub">Holding a lotus over a peaceful pond</div>
+                </div>
+            </div>
+            <div class="card"><img src="photography/p21.jpeg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Backwater Paradise</div>
+                    <div class="img-sub">Palm trees reflecting on calm river waters</div>
+                </div>
+            </div>
 
-<p class="text-gray-400 mb-8">
-Open for collaborations and creative projects.
-</p>
+            <!-- Sketches -->
+            <div class="card"><img src="sketches/s1.webp" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Shiva Portrait</div>
+                    <div class="img-sub">A detailed pencil portrait inspired by Lord Shiva</div>
+                </div>
+            </div>
+            <div class="card"><img src="sketches/s2.jpg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Still Life Study</div>
+                    <div class="img-sub">Carefully shaded objects exploring light and shadow</div>
+                </div>
+            </div>
+            <div class="card"><img src="sketches/s3.jpg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Concept Sketch</div>
+                    <div class="img-sub">An early idea captured on paper</div>
+                </div>
+            </div>
+            <div class="card"><img src="sketches/s4.jpg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Hand Study</div>
+                    <div class="img-sub">Exploring anatomy and movement through lines</div>
+                </div>
+            </div>
+            <div class="card"><img src="sketches/s5.jpg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Workspace</div>
+                    <div class="img-sub">Tools and sketches shaping creativity</div>
+                </div>
+            </div>
+            <div class="card"><img src="sketches/s6.jpg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Animal Study</div>
+                    <div class="img-sub">Detailed sketch capturing animal texture</div>
+                </div>
+            </div>
+            <div class="card"><img src="sketches/s7.jpg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Figure Drawing</div>
+                    <div class="img-sub">Exploring human form through graphite</div>
+                </div>
+            </div>
+            <div class="card"><img src="sketches/s8.webp" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Dark Portrait</div>
+                    <div class="img-sub">A dramatic portrait exploring shadows</div>
+                </div>
+            </div>
+            <div class="card"><img src="sketches/s9.webp" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Fantasy Horse</div>
+                    <div class="img-sub">A mystical horse emerging from imagination</div>
+                </div>
+            </div>
+            <div class="card"><img src="sketches/s10.jpg" onclick="openImg(this)">
+                <div class="caption">
+                    <div class="img-name">Abstract Creature</div>
+                    <div class="img-sub">Creative form blending fantasy and emotion</div>
+                </div>
+            </div>
 
-<a href="mailto:pavanhegade1232@gmail.com"
-class="bg-white text-black px-8 py-3 rounded-full">
-Connect </a>
+        </div>
 
-</section>
+    </section>
 
-<!-- POPUP VIEWER -->
+    <!-- CONTACT -->
 
-<div id="popup">
-<img id="popupImg">
-</div>
+    <section id="contact" class="py-24 text-center">
 
-<!-- FOOTER -->
+        <h2 class="text-4xl font-bold mb-6">
+            Contact Me
+        </h2>
 
-<footer class="footer">
+        <p class="text-gray-400 mb-8">
+            Interested in working together or just saying hello?
+        </p>
 
-<p>© 2025 Pavan Hegde</p>
+        <a href="mailto:pavanhegde1232@gmail.com" class="bg-white text-black px-8 py-3 rounded-full">
+            Connect </a>
 
-<div>
-<a href="https://instagram.com/pa.v0ne">Instagram</a>
-<a href="https://linkedin.com">LinkedIn</a>
-</div>
+    </section>
 
-</footer>
+    <!-- POPUP VIEWER -->
 
-<script>
+    <div id="popup">
+        <img id="popupImg">
+    </div>
 
-/* SCROLL PROGRESS */
+    <!-- FOOTER -->
 
-window.addEventListener("scroll",()=>{
-let scrollTop=document.documentElement.scrollTop;
-let height=document.documentElement.scrollHeight-document.documentElement.clientHeight;
-let progress=(scrollTop/height)*100;
-document.getElementById("scrollProgress").style.width=progress+"%";
-});
+    <footer class="footer">
 
+         <p>© 2026 Pavan Hegde | Made with ❤️</p>
 
-/* CREATIVE THOUGHT */
+        <div>
+            <a href="https://instagram.com/pa.v0ne">Instagram</a>
+            <a href="https://www.linkedin.com/in/pavan06/">LinkedIn</a>
+            <a href="https://github.com/07pavan">GitHub</a>
+        </div>
 
-const thoughts=[
-"Photography is the pause button of life.",
-"Every picture is a poem without words.",
-"Creativity begins where comfort ends.",
-"Art reveals what words cannot explain.",
-"Light creates the story in photography."
-];
+    </footer>
 
-const quoteElement=document.getElementById("quote");
+    <script>
 
-function typeWriter(text){
-quoteElement.innerHTML="";
-let i=0;
-function typing(){
-if(i<text.length){
-quoteElement.innerHTML+=text.charAt(i);
-i++;
-setTimeout(typing,30);
-}}
-typing();
-}
+        /* SCROLL PROGRESS */
 
-typeWriter(thoughts[new Date().getDate()%thoughts.length]);
-
-document.getElementById("thoughtBox").addEventListener("click",()=>{
-const random=thoughts[Math.floor(Math.random()*thoughts.length)];
-typeWriter(random);
-});
+        window.addEventListener("scroll", () => {
+            let scrollTop = document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let progress = (scrollTop / height) * 100;
+            document.getElementById("scrollProgress").style.width = progress + "%";
+        });
 
 
-/* POPUP GALLERY */
+        /* CREATIVE THOUGHT */
 
-const popup=document.getElementById("popup");
-const popupImg=document.getElementById("popupImg");
-const images=[...document.querySelectorAll(".card img")];
-let currentIndex=0;
+        const thoughts = [
+            "Still figuring out life… but my camera helps.",
+            "Photography is the pause button of life.",
+            "Every picture is a poem without words.",
+            "I don't take photos, I collect moments 📸",
+            "Warning: This website may cause creative inspiration.",
+            "Coffee ☕ + Camera 📷 = My daily algorithm.",
+            "If life gets blurry, adjust your focus.",
+            "Turning random moments into timeless memories.",
+            "Creativity begins where comfort ends.",
+            "Art reveals what words cannot explain.",
+            "Light creates the story in photography.",
+            "Reality, but with better lighting.",
+            "A camera is my favorite way to pause time.",
+            "Pixels today, memories forever.",
+            "Some see ordinary, I see a frame.",
+            "Creativity loading... please wait."
+        ];
 
-function openImg(img){
-popup.style.display="flex";
-popupImg.src=img.src;
-currentIndex=images.indexOf(img);
-}
+        const quoteElement = document.getElementById("quote");
 
-popup.onclick=()=>popup.style.display="none";
+        function typeWriter(text) {
+            quoteElement.innerHTML = "";
+            let i = 0;
+            function typing() {
+                if (i < text.length) {
+                    quoteElement.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typing, 30);
+                }
+            }
+            typing();
+        }
+
+        typeWriter(thoughts[new Date().getDate() % thoughts.length]);
+
+        document.getElementById("thoughtBox").addEventListener("click", () => {
+            const random = thoughts[Math.floor(Math.random() * thoughts.length)];
+            typeWriter(random);
+        });
 
 
-/* SWIPE MOBILE */
+        /* POPUP GALLERY */
 
-let startX=0;
+        const popup = document.getElementById("popup");
+        const popupImg = document.getElementById("popupImg");
+        const images = [...document.querySelectorAll(".card img")];
+        let currentIndex = 0;
 
-popup.addEventListener("touchstart",e=>{
-startX=e.touches[0].clientX;
-});
+        function openImg(img) {
+            popup.style.display = "flex";
+            popupImg.src = img.src;
+            currentIndex = images.indexOf(img);
+        }
 
-popup.addEventListener("touchend",e=>{
-let endX=e.changedTouches[0].clientX;
+        popup.onclick = () => popup.style.display = "none";
 
-if(startX-endX>50){
-currentIndex=(currentIndex+1)%images.length;
-popupImg.src=images[currentIndex].src;
-}
 
-if(endX-startX>50){
-currentIndex=(currentIndex-1+images.length)%images.length;
-popupImg.src=images[currentIndex].src;
-}
+        /* SWIPE MOBILE */
 
-});
+        let startX = 0;
 
-</script>
+        popup.addEventListener("touchstart", e => {
+            startX = e.touches[0].clientX;
+        });
+
+        popup.addEventListener("touchend", e => {
+            let endX = e.changedTouches[0].clientX;
+
+            if (startX - endX > 50) {
+                currentIndex = (currentIndex + 1) % images.length;
+                popupImg.src = images[currentIndex].src;
+            }
+
+            if (endX - startX > 50) {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                popupImg.src = images[currentIndex].src;
+            }
+
+        });
+
+    </script>
 
 </body>
+
 </html>
