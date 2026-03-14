@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pavan Hegde – Portfolio</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+
+html{scroll-behavior:smooth;}
+
+body{
+background:#0f0f0f;
+color:white;
+font-family:system-ui;
+}
+
+/* scroll animation */
+
+.reveal{
+opacity:0;
+transform:translateY(60px);
+transition:1s;
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+
+/* hero */
+
+.hero{
+background:url("https://picsum.photos/1920/1200?grayscale") center/cover no-repeat;
+position:relative;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+inset:0;
+background:rgba(0,0,0,0.6);
+}
+
+/* gallery */
+
+.card{
+position:relative;
+overflow:hidden;
+}
+
+.card img{
+transition:.6s;
+}
+
+.card:hover img{
+transform:scale(1.15);
+}
+
+.card::after{
+content:"View";
+position:absolute;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:18px;
+letter-spacing:2px;
+background:rgba(0,0,0,0.5);
+opacity:0;
+transition:.4s;
+}
+
+.card:hover::after{
+opacity:1;
+}
+
+/* quote */
+
+.quote-section{
+background:#0a0a0a;
+padding:100px 24px;
+text-align:center;
+}
+
+.quote-box{
+display:inline-block;
+max-width:720px;
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.1);
+border-radius:18px;
+padding:48px 56px;
+position:relative;
+}
+
+.quote-box::before{
+content:'\201C';
+position:absolute;
+top:-28px;
+left:32px;
+font-size:100px;
+color:rgba(255,255,255,0.15);
+}
+
+.quote-box::after{
+content:'\201D';
+position:absolute;
+bottom:-60px;
+right:32px;
+font-size:100px;
+color:rgba(255,255,255,0.15);
+}
+
+.quote-text{
+font-size:1.35rem;
+font-style:italic;
+color:#e2e2e2;
+line-height:1.7;
+}
+
+/* footer */
+
+.footer{
+background:#050505;
+border-top:1px solid rgba(255,255,255,0.08);
+padding:30px 20px;
+text-align:center;
+}
+
+.footer-links{
+margin-top:10px;
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.footer-links a{
+font-size:14px;
+color:rgba(255,255,255,0.6);
+text-decoration:none;
+transition:.3s;
+}
+
+.footer-links a:hover{
+color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="fixed top-0 left-0 w-full z-50 backdrop-blur bg-black/40 border-b border-white/10">
+<div class="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
+
+<h1 class="font-semibold text-lg tracking-wide">
+Pavan Hegde
+</h1>
+
+<div class="flex gap-6 text-sm text-gray-300">
+
+<a href="#about" class="hover:text-white">About</a> <a href="#thought" class="hover:text-white">Thought</a> <a href="#work" class="hover:text-white">Gallery</a> <a href="#contact" class="hover:text-white">Contact</a>
+
+</div>
+
+</div>
+</nav>
+
+<!-- HERO -->
+
+<section class="hero h-screen flex items-center justify-center text-center">
+
+<div class="relative z-10 reveal max-w-xl px-6">
+
+<img src="profile.jpg"
+class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-white object-cover shadow-lg">
+
+<h1 class="text-6xl font-bold mb-4">
+Pavan Hegde
+</h1>
+
+<p class="text-xl text-gray-300 mb-2">
+📸 Capturing Moments • ✏️ Sketch Artist
+</p>
+
+<p class="text-gray-400 mb-8">
+Turning emotions into visual stories
+</p>
+
+<a href="#work"
+class="bg-white text-black px-8 py-3 rounded-full font-semibold hover:scale-110 transition">
+View My Gallery </a>
+
+</div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section id="about" class="py-24 text-center max-w-3xl mx-auto reveal">
+
+<h2 class="text-4xl font-bold mb-6">
+About Me
+</h2>
+
+<p class="text-gray-400 text-lg leading-relaxed">
+
+Hi, I'm Pavan.
+
+I love capturing real moments through photography and expressing emotions through sketches.
+
+Every photo and every line tells a story.
+This space is where creativity, imagination, and visual storytelling come together.
+
+</p>
+
+</section>
+
+<!-- CREATIVE THOUGHT -->
+
+<section id="thought" class="quote-section reveal">
+
+<h2 class="text-4xl font-bold mb-10">Creative Thought</h2>
+
+<div class="quote-box">
+<p id="quote" class="quote-text"></p>
+</div>
+
+</section>
+
+<!-- GALLERY -->
+
+<section id="work" class="py-24 max-w-6xl mx-auto px-6">
+
+<h2 class="text-5xl font-bold text-center mb-12 reveal">
+Gallery
+</h2>
+
+<div class="flex justify-center gap-4 mb-10">
+
+<button onclick="filterSelection('all')" class="bg-white text-black px-5 py-2 rounded-full">All</button> <button onclick="filterSelection('photo')" class="px-5 py-2 border rounded-full">Photography</button> <button onclick="filterSelection('sketch')" class="px-5 py-2 border rounded-full">Sketch</button>
+
+</div>
+
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+<div class="card photo reveal rounded-xl">
+<img src="photography\p1.jpg" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+<div class="card photo reveal rounded-xl">
+<img src="photography\p2.jpg" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+<div class="card sketch reveal rounded-xl">
+<img src="sketches\s1.webp" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+<div class="card photo reveal rounded-xl">
+<img src="photography\p3.jpg" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+<div class="card sketch reveal rounded-xl">
+<img src="sketches\s2.jpg" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+<div class="card photo reveal rounded-xl">
+<img src="photography\p4.jpg" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+<div class="card photo reveal rounded-xl">
+<img src="photography\p5.jpg" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+
+<div class="card sketch reveal rounded-xl">
+<img src="sketches\s3.jpg" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+<div class="card photo reveal rounded-xl">
+<img src="photography\p6.jpg" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+<div class="card photo reveal rounded-xl">
+<img src="photography\p7.jpg" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+<div class="card sketch reveal rounded-xl">
+<img src="sketches\s4.jpg" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+
+<div class="card photo reveal rounded-xl">
+<img src="photography\p8.jpg" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+<div class="card photo reveal rounded-xl">
+<img src="photography\p9.jpg" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+<div class="card photo reveal rounded-xl">
+<img src="photography\p10.jpg" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+<div class="card sketch reveal rounded-xl">
+<img src="sketches\s5.jpg" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+<div class="card photo reveal rounded-xl">
+<img src="photography\p12.jpg" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+<div class="card sketch reveal rounded-xl">
+<img src="sketches\s6.jpg" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+<div class="card photo reveal rounded-xl">
+<img src="photography\p13.jpg" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+<div class="card sketch reveal rounded-xl">
+<img src="sketches\s7.jpg" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+<div class="card photo reveal rounded-xl">
+<img src="photography\p14.jpeg" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+<div class="card photo reveal rounded-xl">
+<img src="photography\p15.jpeg" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+<div class="card sketch reveal rounded-xl">
+<img src="sketches\s8.webp" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+<div class="card photo reveal rounded-xl">
+<img src="photography\p19.jpeg" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+<div class="card sketch reveal rounded-xl">
+<img src="sketches\s9.webp" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+<div class="card sketch reveal rounded-xl">
+<img src="sketches\s10.jpg" onclick="openImg(this)" class="w-full h-80 object-cover cursor-pointer">
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact" class="py-24 text-center reveal">
+
+<h2 class="text-4xl font-bold mb-6">
+Contact Me
+</h2>
+
+<p class="text-gray-400 mb-8">
+Feel free to reach out for collaborations or creative discussions.
+</p>
+
+<a href="mailto:pavanhegade1232@gmail.com"
+class="bg-white text-black px-8 py-3 rounded-full font-semibold hover:scale-105 transition">
+Connect </a>
+
+</section>
+
+<!-- IMAGE POPUP -->
+
+<div id="popup" class="fixed inset-0 bg-black bg-opacity-90 hidden items-center justify-center">
+
+<img id="popupImg" class="max-h-[90%] rounded-lg">
+
+</div>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+<p>© 2025 Pavan Hegde. All Rights Reserved.</p>
+
+<div class="footer-links">
+
+<a href="https://instagram.com/pa.v0ne" target="_blank">
+Instagram
+</a>
+
+<a href="https://www.linkedin.com/in/pavan06/" target="_blank">
+LinkedIn
+</a>
+
+<a href="mailto:pavanhegade1232@gmail.com">
+Email
+</a>
+
+</div>
+
+</footer>
+
+<script>
+
+/* scroll animation */
+
+function reveal(){
+
+var reveals=document.querySelectorAll(".reveal");
+
+for(var i=0;i<reveals.length;i++){
+
+var windowHeight=window.innerHeight;
+var elementTop=reveals[i].getBoundingClientRect().top;
+
+if(elementTop<windowHeight-100){
+reveals[i].classList.add("active");
+}
+
+}
+
+}
+
+window.addEventListener("scroll",reveal);
+reveal();
+
+
+
+/* filter */
+
+function filterSelection(category){
+
+var cards=document.querySelectorAll(".card");
+
+cards.forEach(card=>{
+
+if(category=="all"){
+card.style.display="block";
+}
+else{
+card.style.display=card.classList.contains(category)?"block":"none";
+}
+
+})
+
+}
+
+
+
+/* popup */
+
+function openImg(img){
+
+document.getElementById("popup").style.display="flex";
+document.getElementById("popupImg").src=img.src;
+
+}
+
+document.getElementById("popup").onclick=function(){
+this.style.display="none";
+}
+
+
+
+/* quotes */
+
+const quotes=[
+"Creativity takes courage.",
+"Art enables us to find ourselves.",
+"Photography is the story I fail to put into words.",
+"Every artist was first an amateur.",
+"Capture moments before they become memories."
+];
+
+let day=new Date().getDate();
+document.getElementById("quote").innerText=quotes[day%quotes.length];
+
+</script>
+
+</body>
+</html>
